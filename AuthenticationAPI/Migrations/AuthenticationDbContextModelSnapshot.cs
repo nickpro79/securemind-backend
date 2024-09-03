@@ -24,8 +24,11 @@ namespace AuthenticationAPI.Migrations
 
             modelBuilder.Entity("AuthenticationAPI.Models.Role", b =>
                 {
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -38,12 +41,29 @@ namespace AuthenticationAPI.Migrations
                     b.HasKey("RoleId");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            Description = "Regular user with basic access rights.",
+                            RoleName = "User"
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            Description = "Administrator with full access rights.",
+                            RoleName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("AuthenticationAPI.Models.User", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -67,11 +87,11 @@ namespace AuthenticationAPI.Migrations
 
             modelBuilder.Entity("AuthenticationAPI.Models.UserRole", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId", "RoleId");
 

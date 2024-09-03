@@ -20,8 +20,6 @@ namespace AuthenticationAPI.Data
             modelBuilder.Entity<Role>().HasKey(r => r.RoleId);
             modelBuilder.Entity<UserRole>().HasKey(ur => new { ur.UserId, ur.RoleId });
 
-
-
             modelBuilder.Entity<UserRole>()
                 .HasOne(ur => ur.User)
                 .WithMany(u => u.UserRoles)
@@ -31,6 +29,11 @@ namespace AuthenticationAPI.Data
                 .HasOne(ur => ur.Role)
                 .WithMany(r => r.UserRoles)
                 .HasForeignKey(ur => ur.RoleId);
+
+            modelBuilder.Entity<Role>().HasData(
+            new Role { RoleId = 1, RoleName = "User", Description = "Regular user with basic access rights." },
+            new Role { RoleId = 2, RoleName = "Admin", Description = "Administrator with full access rights." }
+);
         }
     }
 }
