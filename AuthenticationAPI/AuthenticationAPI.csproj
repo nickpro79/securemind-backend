@@ -22,8 +22,8 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Contracts\" />
     <Folder Include="TokenManager\" />
-    <Folder Include="Repository\" />
   </ItemGroup>
 
 </Project>
