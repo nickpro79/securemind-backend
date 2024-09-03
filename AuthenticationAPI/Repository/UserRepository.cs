@@ -1,5 +1,6 @@
 ﻿using AuthenticationAPI.Data;
 using AuthenticationAPI.DTO;
+using AuthenticationAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -49,9 +50,25 @@ namespace AuthenticationAPI.Repository
             return null;
         }
 
-        public Task<bool> Register(UserDTO userDTO)
+        public async Task<bool> Register(UserDTO userDTO)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FirstOrDefaultAsync(x=>x.Name== userDTO.Name||x.Email==userDTO.Email);
+            if (user != null)
+            {
+                return false;
+            }
+
+            User newUser = new User()
+            {
+                Name = userDTO.Name,
+                Email = userDTO.Email,
+                Password = userDTO.Password,
+                RegistrationDate = DateTime.Now,
+            };
+
+            await _context.Users.AddAsync(newUser);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }
