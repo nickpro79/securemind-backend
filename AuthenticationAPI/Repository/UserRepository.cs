@@ -52,8 +52,8 @@ namespace AuthenticationAPI.Repository
 
         public async Task<bool> Register(UserDTO userDTO)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x=>x.Name== userDTO.Name||x.Email==userDTO.Email);
-            if (user != null)
+            var user = await _context.Users.AnyAsync(x=>x.Name== userDTO.Name||x.Email==userDTO.Email);
+            if (user != false)
             {
                 return false;
             }
@@ -63,7 +63,7 @@ namespace AuthenticationAPI.Repository
                 Name = userDTO.Name,
                 Email = userDTO.Email,
                 Password = userDTO.Password,
-                RegistrationDate = DateTime.Now,
+                RegistrationDate = DateTime.UtcNow,
             };
 
             await _context.Users.AddAsync(newUser);
