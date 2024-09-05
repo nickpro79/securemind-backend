@@ -27,16 +27,17 @@ namespace AuthenticationAPI.Repository
                 UserName = model.Username,
             };
             var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+            {
+                return new Response { Status = "Error", Message = "User creation failed! Please check user details and try again!" };
+            }
             if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
             if (!await _roleManager.RoleExistsAsync(UserRoles.User))
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
 
             await _userManager.AddToRoleAsync(user, UserRoles.User);
-            if (!result.Succeeded)
-            {
-                return new Response { Status = "Error", Message = "User creation failed! Please check user details and try again!" };
-            }
+
             return new Response { Status = "Success", Message = "User created successfully" };
 
         }
