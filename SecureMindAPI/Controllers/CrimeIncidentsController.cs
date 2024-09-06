@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SecureMindAPI.Contract;
 using SecureMindAPI.Data;
+using SecureMindAPI.DTOs;
 
 namespace SecureMindAPI.Controllers
 {
@@ -9,17 +11,15 @@ namespace SecureMindAPI.Controllers
     [ApiController]
     public class CrimeIncidentsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        public CrimeIncidentsController(ApplicationDbContext context)
+        private readonly ICrimeIncident _crimeIncident;
+        public CrimeIncidentsController(ICrimeIncident crimeIncident)
         {
-            _context = context;
+            _crimeIncident = crimeIncident;
         }
-        [HttpGet]
-        public async Task<IActionResult> GetAllIncidents()
+        public async Task<ActionResult<IEnumerable<IncidentsDto>>> GetAllIncidents()
         {
-            var incidents = await _context.CrimeIncidents
-                .Include(i => i.Location) // Include location if needed
-                .ToListAsync();
+            // Await the result from the service
+            var incidents = await _crimeIncident.GetAllIncidentsAsync();
 
             if (incidents == null || !incidents.Any())
             {
@@ -28,8 +28,7 @@ namespace SecureMindAPI.Controllers
 
             return Ok(incidents);
         }
-
-
-
     }
+
 }
+

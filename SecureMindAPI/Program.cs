@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using SecureMindAPI.Contract;
 using SecureMindAPI.Data;
+using SecureMindAPI.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,7 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
         options.JsonSerializerOptions.WriteIndented = true;
     });
+builder.Services.AddScoped<ICrimeIncident,CrimeIncidentRepository>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowMyOrigin",
