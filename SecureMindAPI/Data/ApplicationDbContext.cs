@@ -17,14 +17,22 @@ namespace SecureMindAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Incidents>()
+                .HasKey(i => i.IncidentId);
+
+            modelBuilder.Entity<Incidents>()
             .HasOne(ci => ci.Location)
             .WithMany(l => l.CrimeIncidents)
             .HasForeignKey(ci => ci.LocationId);
 
             modelBuilder.Entity<Reports>()
+                .HasKey(r => r.ReportId);
+            modelBuilder.Entity<Reports>()
             .HasOne(ar => ar.Location)
             .WithMany(l => l.AnonymousReports)
             .HasForeignKey(ar => ar.LocationId);
+
+            modelBuilder.Entity<Counsellors>()
+            .HasKey(c => c.CounsellorId);
 
             modelBuilder.Entity<Counsellors>()
             .HasOne(mhp => mhp.Location)

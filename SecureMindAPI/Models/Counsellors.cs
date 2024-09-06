@@ -2,8 +2,8 @@
 {
     public class Counsellors
     {
-        public int ProfessionalId { get; set; }
-        public string LocationId { get; set; }
+        public int CounsellorId { get; set; }
+        public int LocationId { get; set; }
         public string Name { get; set; }
         public string Specialization { get; set; }
         public string ContactInfo { get; set; }
