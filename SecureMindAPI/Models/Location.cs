@@ -1,4 +1,6 @@
-﻿namespace SecureMindAPI.Models
+﻿using System.Text.Json.Serialization;
+
+namespace SecureMindAPI.Models
 {
     public class Location
     {
@@ -6,7 +8,7 @@
         public string Name { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
-
+        [JsonIgnore] // Prevent circular references
         public ICollection<Incidents> CrimeIncidents { get; set; }
         public ICollection<Reports> AnonymousReports { get; set; }
         public ICollection<Counsellors> MentalHealthProfessionals { get; set; }
