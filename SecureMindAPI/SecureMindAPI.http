@@ -1,0 +1,6 @@
+@SecureMindAPI_HostAddress = http://localhost:5240
+
+GET {{SecureMindAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
