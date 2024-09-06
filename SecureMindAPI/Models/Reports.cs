@@ -2,7 +2,7 @@
 {
     public class Reports
     {
-        public string ReportId { get; set; }
+        public int ReportId { get; set; }
         public string LocationId { get; set; }
         public string Description { get; set; }
         public DateTime ReportTime { get; set; }
