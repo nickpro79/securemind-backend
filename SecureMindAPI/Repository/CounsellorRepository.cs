@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SecureMindAPI.Contract;
 using SecureMindAPI.Data;
-using SecureMindAPI.DTOs;
+using SecureMindAPI.DTOs.CounsellorRequestDTO;
 
 namespace SecureMindAPI.Repository
 {
@@ -12,14 +12,14 @@ namespace SecureMindAPI.Repository
         {
            _context = context;
         }
-        public async Task<IEnumerable<CounsellerDTO>> FilterBySpecialization(string specialization)
+        public async Task<IEnumerable<CounsellerResponseDTO>> FilterBySpecialization(string specialization)
         {
             {
                 var counsellors = await _context.MentalHealthProfessionals
                     .Where(c => c.Specialization.Contains(specialization))
                     .ToListAsync();
 
-                return counsellors.Select(c => new CounsellerDTO
+                return counsellors.Select(c => new CounsellerResponseDTO
                 {
                     Name = c.Name,
                     Specialization = c.Specialization,
@@ -28,10 +28,10 @@ namespace SecureMindAPI.Repository
             }
         }
 
-        public async Task<IEnumerable<CounsellerDTO>> GetAll()
+        public async Task<IEnumerable<CounsellerResponseDTO>> GetAll()
         {
             var counsellors = await _context.MentalHealthProfessionals.ToListAsync();
-            var result = counsellors.Select(c => new CounsellerDTO
+            var result = counsellors.Select(c => new CounsellerResponseDTO
             {
                 Name = c.Name,
                 Specialization = c.Specialization,
