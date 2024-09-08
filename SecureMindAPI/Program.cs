@@ -15,6 +15,7 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.WriteIndented = true;
     });
 builder.Services.AddScoped<ICrimeIncident,CrimeIncidentRepository>();
+builder.Services.AddScoped<ICounsellorsRepository, CounsellorRepository>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowMyOrigin",

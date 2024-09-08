@@ -12,26 +12,31 @@ namespace SecureMindAPI.Repository
         {
            _context = context;
         }
-        public Task<IEnumerable<CounsellerDTO>> FilterBySpecialization(string specialization)
+        public async Task<IEnumerable<CounsellerDTO>> FilterBySpecialization(string specialization)
         {
-            throw new NotImplementedException();
+            {
+                var counsellors = await _context.MentalHealthProfessionals
+                    .Where(c => c.Specialization.Contains(specialization))
+                    .ToListAsync();
+
+                return counsellors.Select(c => new CounsellerDTO
+                {
+                    Name = c.Name,
+                    Specialization = c.Specialization,
+                    ContactInfo = c.ContactInfo
+                });
+            }
         }
 
         public async Task<IEnumerable<CounsellerDTO>> GetAll()
         {
-            var Counsellors = await _context.MentalHealthProfessionals.ToListAsync();
-            var result = new List<CounsellerDTO>();
-            Counsellors.ForEach(c =>
+            var counsellors = await _context.MentalHealthProfessionals.ToListAsync();
+            var result = counsellors.Select(c => new CounsellerDTO
             {
-                CounsellerDTO temp = new CounsellerDTO()
-                {
-                    Name = c.Name,
-                    Specialization = c.Specialization,
-                    ContactInfo = c.ContactInfo,
-                };
-                result.Add(temp);
+                Name = c.Name,
+                Specialization = c.Specialization,
+                ContactInfo = c.ContactInfo
             });
-
             return result;
         }
     }
