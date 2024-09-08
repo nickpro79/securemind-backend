@@ -1,6 +1,6 @@
 ﻿namespace SecureMindAPI.DTOs
 {
-    public class RegisterDTO
+    public class ReportDTO
     {
         public int LocationId { get; set; }
         public string Description { get; set; }
