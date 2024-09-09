@@ -15,32 +15,61 @@ namespace SecureMindAPI.Repository
         {
             _context = context;
         }
-        public async  Task<bool> AddReport(ReportDTO report)
+        public async Task<bool> AddReport(ReportDTO report)
         {
-            if (report == null)
-            {
-                return false;
-            }
-
-            var incident = new Reports
-            {
-                Description = report.Description,
-                ReportTime = report.ReportTime,
-                Location = report.Location != null ? new Location
+                if (report == null)
                 {
-                    Latitude = report.Location.Latitude,
-                    Longitude = report.Location.Longitude
-                } : null
-            };
-            _context.AnonymousReports.Add(incident);
-            await _context.SaveChangesAsync();
-            return true;
-        }
+                    throw new ArgumentNullException(nameof(report));
+                }
+
+                var incident = new Reports
+                {
+                    Description = report.Description,
+                    ReportTime = report.ReportTime
+                };
+
+                if (report.Location != null)
+                {
+                    var existingLocation = await _context.Locations
+                        .FirstOrDefaultAsync(l => l.Latitude == report.Location.Latitude && l.Longitude == report.Location.Longitude);
+
+                    if (existingLocation != null)
+                    {
+                        incident.Location = existingLocation;
+                    }
+                    else
+                    {
+                        var newLocation = new Location
+                        {
+                            Latitude = report.Location.Latitude,
+                            Longitude = report.Location.Longitude
+                        };
+
+                        _context.Locations.Add(newLocation);
+                        await _context.SaveChangesAsync();
+
+                        incident.Location = newLocation;
+                    }
+                }
+
+                try
+                {
+                    _context.AnonymousReports.Add(incident);
+
+                    await _context.SaveChangesAsync();
+
+                    return true;
+                }
+                catch (Exception ex)
+                { 
+                    return false;
+                }
+            }
 
         public async Task<IEnumerable<ReportDTO>> GetAllReports()
         {
             return await _context.CrimeIncidents
-            .Include(i => i.Location) // Include location data
+            .Include(i => i.Location) 
             .Select(i => new ReportDTO
             {
             Description = i.Description,
