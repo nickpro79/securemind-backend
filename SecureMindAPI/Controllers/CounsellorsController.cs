@@ -23,11 +23,12 @@ namespace SecureMindAPI.Controllers
             return Ok(counsellorList);
         }
 
+        
         [HttpGet("Specialization")]
-        public async Task<IActionResult> GetBySpecilization([FromBody] CounsellorRequestBySpecialization request)
+        public async Task<IActionResult> GetBySpecialization([FromQuery] string specialization)
         {
-            var counsellerList = await _counsellorsRepository.FilterBySpecialization(request.Specialization);
-            return Ok(counsellerList);
+            var counsellorList = await _counsellorsRepository.FilterBySpecialization(specialization);
+            return Ok(counsellorList); 
         }
 
     }

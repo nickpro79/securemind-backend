@@ -18,6 +18,7 @@ builder.Services.AddScoped<ICrimeIncident,CrimeIncidentRepository>();
 builder.Services.AddScoped<ICounsellorsRepository, CounsellorRepository>();
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
 builder.Services.AddHttpClient(); // Register IHttpClientFactorybuilder.Services.AddCors(options =>
+builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowMyOrigin",
         builder =>

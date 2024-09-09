@@ -24,7 +24,7 @@ namespace SecureMindAPI.Repository
                     Name = c.Name,
                     Specialization = c.Specialization,
                     ContactInfo = c.ContactInfo
-                });
+                }).ToList();
             }
         }
 
