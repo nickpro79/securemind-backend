@@ -70,13 +70,13 @@ namespace SecureMindAPI.Repository
 
         public async Task<IEnumerable<ReportDTO>> GetAllReports()
         {
-            return await _context.CrimeIncidents
+            return await _context.AnonymousReports
             .Include(i => i.Location) 
             .Select(i => new ReportDTO
             {
             Description = i.Description,
             ReportTime = i.ReportTime,
-            Location = i.Location == null ? null : new LocationDto
+            Location = new LocationDto
             {
             Latitude = i.Location.Latitude,
             Longitude = i.Location.Longitude

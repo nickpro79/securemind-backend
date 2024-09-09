@@ -14,6 +14,13 @@ namespace SecureMindAPI.Controllers
         {
             _reportRepository = reportRepository;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllReports()
+        {
+            var reportList=await _reportRepository.GetAllReports();
+            return Ok(reportList);
+        }
         [HttpPost]
         public async Task<IActionResult> AddReport(ReportDTO report)
         {
