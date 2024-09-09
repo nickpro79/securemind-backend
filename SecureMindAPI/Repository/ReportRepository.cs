@@ -25,7 +25,8 @@ namespace SecureMindAPI.Repository
                 var incident = new Reports
                 {
                     Description = report.Description,
-                    ReportTime = report.ReportTime
+                    ReportTime = report.ReportTime,
+                    Type = report.Type,
                 };
 
                 if (report.Location != null)
@@ -40,7 +41,8 @@ namespace SecureMindAPI.Repository
                     else
                     {
                         var newLocation = new Location
-                        {
+                        {   
+                            Name="",
                             Latitude = report.Location.Latitude,
                             Longitude = report.Location.Longitude
                         };
