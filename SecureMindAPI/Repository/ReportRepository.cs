@@ -2,6 +2,7 @@
 using SecureMindAPI.Contract;
 using SecureMindAPI.Data;
 using SecureMindAPI.DTOs;
+using SecureMindAPI.Models;
 
 namespace SecureMindAPI.Repository
 {
@@ -14,9 +15,26 @@ namespace SecureMindAPI.Repository
         {
             _context = context;
         }
-        public Task<bool> AddReport(ReportDTO report)
+        public async  Task<bool> AddReport(ReportDTO report)
         {
-            throw new NotImplementedException();
+            if (report == null)
+            {
+                return false;
+            }
+
+            var incident = new Reports
+            {
+                Description = report.Description,
+                ReportTime = report.ReportTime,
+                Location = report.Location != null ? new Location
+                {
+                    Latitude = report.Location.Latitude,
+                    Longitude = report.Location.Longitude
+                } : null
+            };
+            _context.AnonymousReports.Add(incident);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task<IEnumerable<ReportDTO>> GetAllReports()
