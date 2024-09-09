@@ -4,7 +4,7 @@ namespace SecureMindAPI.Contract
 {
     public interface IReportRepository
     {
-        public Task<bool> AddRepository(ReportDTO report);
+        public Task<bool> AddReport(ReportDTO report);
         public Task<IEnumerable<ReportDTO>> GetAllReports();
     }
 }

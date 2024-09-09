@@ -14,7 +14,7 @@ namespace SecureMindAPI.Repository
         {
             _context = context;
         }
-        public Task<bool> AddRepository(ReportDTO report)
+        public Task<bool> AddReport(ReportDTO report)
         {
             throw new NotImplementedException();
         }
