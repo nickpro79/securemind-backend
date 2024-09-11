@@ -17,7 +17,7 @@ namespace SecureMindAPI.Repository
         public async Task<IEnumerable<IncidentsDto>> GetAllIncidentsAsync()
         {
             return await _context.CrimeIncidents
-                .Include(i => i.Location) // Include location data
+                .Include(i => i.Location) 
                 .Select(i => new IncidentsDto
                 {
                     IncidentId = i.IncidentId,

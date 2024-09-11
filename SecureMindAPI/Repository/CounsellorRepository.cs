@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SecureMindAPI.Contract;
 using SecureMindAPI.Data;
+using SecureMindAPI.DTOs;
 using SecureMindAPI.DTOs.CounsellorRequestDTO;
 
 namespace SecureMindAPI.Repository
