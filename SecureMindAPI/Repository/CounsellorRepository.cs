@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SecureMindAPI.Contract;
 using SecureMindAPI.Data;
+using SecureMindAPI.DTOs;
 using SecureMindAPI.DTOs.CounsellorRequestDTO;
 
 namespace SecureMindAPI.Repository
@@ -23,7 +24,12 @@ namespace SecureMindAPI.Repository
                 {
                     Name = c.Name,
                     Specialization = c.Specialization,
-                    ContactInfo = c.ContactInfo
+                    ContactInfo = c.ContactInfo,
+                    Location = new LocationDto
+                    {
+                        Latitude = c.Location.Latitude,
+                        Longitude = c.Location.Longitude
+                    }
                 });
             }
         }
