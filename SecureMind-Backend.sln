@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthenticationAPITests", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegisterEndpoint", "RegisterEndpoint\RegisterEndpoint.csproj", "{A6237442-E94E-453E-80D7-E49E8505A25B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginEndpoint", "LoginEndpoint\LoginEndpoint.csproj", "{D1667205-160C-4A5A-816B-594DBAC49B9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{A6237442-E94E-453E-80D7-E49E8505A25B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6237442-E94E-453E-80D7-E49E8505A25B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6237442-E94E-453E-80D7-E49E8505A25B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1667205-160C-4A5A-816B-594DBAC49B9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1667205-160C-4A5A-816B-594DBAC49B9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1667205-160C-4A5A-816B-594DBAC49B9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1667205-160C-4A5A-816B-594DBAC49B9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +51,7 @@ Global
 		{A88C5A60-F88A-471D-B156-64E0E688E0DE} = {00C9B007-C15B-4A56-B0A7-E78DE2A63A89}
 		{6BF7EA65-944C-45CC-9828-59DD756A232C} = {4DE8492D-0F28-406A-B987-FAD31EF39B71}
 		{A6237442-E94E-453E-80D7-E49E8505A25B} = {6BF7EA65-944C-45CC-9828-59DD756A232C}
+		{D1667205-160C-4A5A-816B-594DBAC49B9E} = {6BF7EA65-944C-45CC-9828-59DD756A232C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B2C5591B-864E-4EAB-BAB0-8EEF823214D4}

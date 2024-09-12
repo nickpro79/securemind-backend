@@ -49,6 +49,7 @@ namespace AuthenticationAPI.Tests
             var model = new Register { Username = "newuser", Email = "newuser@example.com", Password = "Password123" };
             _userManagerMock.Setup(um => um.FindByNameAsync(model.Username))
                 .ReturnsAsync((IdentityUser)null);
+
             _userManagerMock.Setup(um => um.CreateAsync(It.IsAny<IdentityUser>(), model.Password))
                 .ReturnsAsync(IdentityResult.Failed());
 

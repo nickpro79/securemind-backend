@@ -16,7 +16,7 @@ namespace AuthenticationAPI.Repository
         {
             _userManager = userManager;
             _configuration = configuration;
-
+            
         }
         public async Task<JwtSecurityToken> Login(Login model)
         {
