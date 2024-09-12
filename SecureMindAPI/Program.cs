@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SecureMindAPI.Contract;
 using SecureMindAPI.Data;
+using SecureMindAPI.Extensions;
 using SecureMindAPI.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,6 +34,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SecureMind"));
 });
 var app = builder.Build();
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+app.ConfigureExceptionHandler(logger);
 app.UseCors("AllowMyOrigin");
 
 // Configure the HTTP request pipeline.
