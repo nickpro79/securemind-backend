@@ -15,18 +15,22 @@ namespace SecureMindAPI.Repository
         }
         public async Task<IEnumerable<CounsellerResponseDTO>> FilterBySpecialization(string specialization)
         {
-            {
-                var counsellors = await _context.MentalHealthProfessionals
-                    .Where(c => c.Specialization.Contains(specialization))
-                    .ToListAsync();
-
-                return counsellors.Select(c => new CounsellerResponseDTO
+            return await _context.MentalHealthProfessionals
+            .Include(i => i.Location)
+            .Where(i=> i.Specialization == specialization)
+            .Select(i => new CounsellerResponseDTO
+               {
+                Name = i.Name,
+                Specialization=i.Specialization,
+                ContactInfo = i.ContactInfo,
+                Location = new LocationDto
                 {
-                    Name = c.Name,
-                    Specialization = c.Specialization,
-                    ContactInfo = c.ContactInfo
-                }).ToList();
-            }
+                Latitude = i.Location.Latitude,
+                Longitude = i.Location.Longitude,
+                LocationName = i.Location.Name
+                 }
+                })
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<CounsellerResponseDTO>> GetAll()
@@ -36,7 +40,13 @@ namespace SecureMindAPI.Repository
             {
                 Name = c.Name,
                 Specialization = c.Specialization,
-                ContactInfo = c.ContactInfo
+                ContactInfo = c.ContactInfo,
+                Location=new LocationDto { 
+                    Latitude = c.Location.Latitude, 
+                    Longitude=c.Location.Longitude,
+                    LocationName = c.Location.Name
+                }
+           
             });
             return result;
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SecureMindAPI.Contract;
 using SecureMindAPI.DTOs.CounsellorRequestDTO;
@@ -7,6 +8,7 @@ namespace SecureMindAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CounsellorsController : ControllerBase
     {
         private ICounsellorsRepository _counsellorsRepository;
