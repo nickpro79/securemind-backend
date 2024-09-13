@@ -8,6 +8,7 @@ namespace SecureMindAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CounsellorsController : ControllerBase
     {
         private ICounsellorsRepository _counsellorsRepository;

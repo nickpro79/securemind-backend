@@ -26,7 +26,8 @@ namespace SecureMindAPI.Repository
                 Location = new LocationDto
                 {
                 Latitude = i.Location.Latitude,
-                Longitude = i.Location.Longitude
+                Longitude = i.Location.Longitude,
+                LocationName = i.Location.Name
                  }
                 })
                 .ToListAsync();
@@ -42,7 +43,8 @@ namespace SecureMindAPI.Repository
                 ContactInfo = c.ContactInfo,
                 Location=new LocationDto { 
                     Latitude = c.Location.Latitude, 
-                    Longitude=c.Location.Longitude
+                    Longitude=c.Location.Longitude,
+                    LocationName = c.Location.Name
                 }
            
             });

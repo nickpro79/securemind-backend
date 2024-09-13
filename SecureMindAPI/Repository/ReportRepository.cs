@@ -79,7 +79,8 @@ namespace SecureMindAPI.Repository
             Location = new LocationDto
             {
             Latitude = i.Location.Latitude,
-            Longitude = i.Location.Longitude
+            Longitude = i.Location.Longitude,
+            LocationName = i.Location.Name
             }
             })
             .ToListAsync();
