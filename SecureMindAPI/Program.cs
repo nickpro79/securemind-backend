@@ -8,7 +8,6 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 ConfigurationManager configuration = builder.Configuration;
 builder.Services.AddControllers();
 builder.Services.AddControllers()
@@ -20,13 +19,13 @@ builder.Services.AddControllers()
 builder.Services.AddScoped<ICrimeIncident,CrimeIncidentRepository>();
 builder.Services.AddScoped<ICounsellorsRepository, CounsellorRepository>();
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
-builder.Services.AddHttpClient(); // Register IHttpClientFactory
+builder.Services.AddHttpClient();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowMyOrigin",
         builder =>
         {
-            builder.WithOrigins("http://localhost:4200") // Angular application URL
+            builder.WithOrigins("http://localhost:4200") 
                    .AllowAnyMethod()
                    .AllowAnyHeader();
         });
@@ -57,7 +56,6 @@ builder.Services.AddAuthentication(options =>
 var app = builder.Build();
 app.UseCors("AllowMyOrigin");
 
-// Configure the HTTP request pipeline.
 
 app.UseAuthorization();
 
